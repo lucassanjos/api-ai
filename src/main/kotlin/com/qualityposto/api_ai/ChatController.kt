@@ -20,7 +20,7 @@ class ChatController (
         chatClientBuilder.defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build()).build()
 
     @GetMapping("/ai")
-    fun conversaOpenAi(userInput: String): String? {
+    fun chatOpenAi(userInput: String): String? {
         return chatClient.prompt()
             .user(userInput)
             .call()
@@ -28,7 +28,7 @@ class ChatController (
     }
 
     @GetMapping("/ai/memory")
-    fun conversaOpenAiMemory(
+    fun chatOpenAiMemory(
         @RequestParam userInput: String,
         @RequestParam chatId: String
     ): String? {
@@ -40,7 +40,7 @@ class ChatController (
     }
 
     @PostMapping("/excel/analise")
-    fun analyzeExcel(
+    fun chatOpenAiMemoryAnaliseExcel(
         @RequestParam("arquivo") arquivo: MultipartFile,
         @RequestParam("instrucao") instrucao: String
     ): String? {
@@ -73,7 +73,7 @@ class ChatController (
     }
 
     @PostMapping("/excel/analise/memory")
-    fun conversaOpenAiMemoryAnaliseExcel(
+    fun chatOpenAiMemoryAnaliseExcelMemory(
         @RequestParam("arquivo") arquivo: MultipartFile,
         @RequestParam("instrucao") instrucao: String,
         @RequestParam("chatId") chatId: String
