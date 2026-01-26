@@ -23,6 +23,9 @@ extra["springAiVersion"] = "1.1.2"
 
 dependencies {
 	implementation("org.apache.poi:poi-ooxml:5.2.5")
+	implementation("org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc")
+	runtimeOnly("org.postgresql:postgresql")
+	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
