@@ -12,21 +12,12 @@ import org.springframework.web.multipart.MultipartFile
 
 @RestController
 class ChatController (
-    chatClientBuilder: ChatClient.Builder,
-    chatMemory: ChatMemory,
     private val chatService: ChatService,
-    service: ChatService
 ) {
-//    private val chatClient =
-//        chatClientBuilder.defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build()).build()
-
-//    @GetMapping("/ai")
-//    fun chatOpenAi(userInput: String): String? {
-//        return chatClient.prompt()
-//            .user(userInput)
-//            .call()
-//            .content()
-//    }
+    @GetMapping("/ai")
+    fun chatOpenAi(userInput: String): String? {
+        return chatService.chatOpenAi(userInput)
+    }
 
     @GetMapping("/ai/memory")
     fun chatOpenAiMemory(
@@ -57,6 +48,10 @@ class ChatController (
         }
 
         return chatService.chatOpenAiMemoryAnaliseExcel(instrucao, arquivoExcel)
+    }
+
+    fun teste(){
+        val nome = "Meu nome é Lucas "
     }
 
 //    @PostMapping("/excel/analise/memory")

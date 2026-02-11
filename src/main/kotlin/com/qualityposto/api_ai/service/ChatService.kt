@@ -30,6 +30,10 @@ class ChatService(
             .content()
     }
 
+    fun chatOpenAi(instrucao: String): String? {
+        return chatClient.prompt().user{i -> i.text(instrucao)}.call().content()
+    }
+
     fun chatOpenAiMemory(
         userInput: String,
         chatId: String
