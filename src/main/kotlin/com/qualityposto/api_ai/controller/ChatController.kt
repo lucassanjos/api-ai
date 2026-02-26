@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 class ChatController (
     private val chatService: ChatService,
-    private val pdfService: PdfService,
 ) {
     @PostMapping(
         "/ai/pdf/analise",

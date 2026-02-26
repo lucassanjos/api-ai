@@ -13,7 +13,7 @@ class ChatService(
     chatClientBuilder: ChatClient.Builder,
     chatMemory: ChatMemory,
     webClientBuilder: WebClient.Builder,
-    @Value("\${openai.api.key}")
+    @Value("\${spring.ai.openai.api-key}")
     private val apiKey: String,
     private val pdfService: PdfService,
     private val promptService: PromptService,
