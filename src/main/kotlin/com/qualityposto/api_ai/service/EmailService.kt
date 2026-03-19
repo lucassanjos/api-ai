@@ -6,6 +6,8 @@ import org.springframework.http.client.MultipartBodyBuilder
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
+import java.nio.charset.StandardCharsets
+import java.util.Base64
 
 @Service
 class EmailService(
@@ -18,21 +20,17 @@ class EmailService(
 
     fun enviar(pdfBytes: ByteArray, html: String) {
 
-        val bodyBuilder = MultipartBodyBuilder()
-
-        bodyBuilder.part(
-            "pdfBytes",
-            ByteArrayResource(pdfBytes)
+        val request = mapOf(
+            "texto" to html,
+            "pdfBytes" to Base64.getEncoder().encodeToString(pdfBytes)
         )
-            .filename("relatorio.pdf")
-            .contentType(MediaType.APPLICATION_PDF)
 
-        bodyBuilder.part("texto", html)
+        val mediaTypeUtf8 = MediaType(MediaType.APPLICATION_JSON, StandardCharsets.UTF_8)
 
         webClient.post()
             .uri("/EMAIL_TESTE")
-            .contentType(MediaType.MULTIPART_FORM_DATA)
-            .body(BodyInserters.fromMultipartData(bodyBuilder.build()))
+            .contentType(mediaTypeUtf8)
+            .bodyValue(request)
             .retrieve()
             .bodyToMono(Void::class.java)
             .block()
